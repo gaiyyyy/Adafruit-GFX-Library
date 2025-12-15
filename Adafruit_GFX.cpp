@@ -849,6 +849,50 @@ void Adafruit_GFX::drawChar(int16_t x, int16_t y, unsigned char c,
     } // End classic vs custom font
 }
 
+// Draw a Taiji (Yin-Yang) symbol
+void Adafruit_GFX::drawTaiji(int16_t cx, int16_t cy, int16_t R, uint16_t color) {
+  int16_t r = R / 2;
+
+
+  for (int16_t y = -R; y <= R; y++) {
+    for (int16_t x = -R; x <= R; x++) {
+
+
+      if (x * x + y * y <= R * R) {
+
+        bool black;
+
+        if (y>=0 && x<=0 ) {
+          black = (x * x + (y - r) * (y - r) <= r * r);
+        } 
+        else if(y>=0 && x>0){
+            black = true;
+        }
+        else if(y<0 && x>=0){
+    
+            black = !(x * x + (y + r) * (y + r) <= r * r);
+        }
+        else{
+
+          black = false;
+        }
+        if (black) {
+          drawPixel(cx + x, cy + y, color);
+        }
+      }
+    }
+  }
+
+  // 两个鱼眼
+  fillCircle(cx, cy - r, r / 4, color);
+  fillCircle(cx, cy + r, r / 4, 0);
+  drawCircle(cx, cy, R, color);
+
+}
+
+
+
+
 #if ARDUINO >= 100
 size_t Adafruit_GFX::write(uint8_t c) {
 #else

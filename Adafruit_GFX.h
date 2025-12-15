@@ -107,6 +107,10 @@ class Adafruit_GFX : public Print {
     getTextBounds(const __FlashStringHelper *s, int16_t x, int16_t y,
       int16_t *x1, int16_t *y1, uint16_t *w, uint16_t *h);
 
+  void drawTaiji(int16_t cx, int16_t cy, int16_t R, uint16_t color);
+
+
+
 #if ARDUINO >= 100
   virtual size_t write(uint8_t);
 #else
