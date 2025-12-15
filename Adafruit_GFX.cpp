@@ -176,6 +176,11 @@ void Adafruit_GFX::drawFastVLine(int16_t x, int16_t y,
     endWrite();
 }
 
+
+
+
+
+
 // (x,y) is leftmost point; if unsure, calling function
 // should sort endpoints or call drawLine() instead
 void Adafruit_GFX::drawFastHLine(int16_t x, int16_t y,
@@ -371,7 +376,7 @@ void Adafruit_GFX::fillRoundRect(int16_t x, int16_t y, int16_t w,
 }
 
 // Draw a Pentagram
-void Adafruit_GFX::drawPentagram(int16_t x0, int16_t y0,
+/*void Adafruit_GFX::drawPentagram(int16_t x0, int16_t y0,
         int16_t r0, uint16_t color) {
 	int xa, ya;
     int xb, yb;
@@ -408,6 +413,28 @@ void Adafruit_GFX::drawEllipse(int16_t x1, int16_t y1, int16_t x2, int16_t y2, i
         }
     }
     endWrite();
+}*/
+
+
+//五角星
+void Adafruit_GFX::drawPentagram(
+    int16_t x0, int16_t y0, int16_t r, uint16_t color
+) {
+    float angle = -90;        // 从正上方开始
+    float step = 144;         // 五角星顶点角度
+
+    int16_t x[5], y[5];
+
+    for (int i = 0; i < 5; i++) {
+        float rad = angle * 3.1415926 / 180.0;
+        x[i] = x0 + r * cos(rad);
+        y[i] = y0 + r * sin(rad);
+        angle += step;
+    }
+
+    for (int i = 0; i < 5; i++) {
+        drawLine(x[i], y[i], x[(i + 1) % 5], y[(i + 1) % 5], color);
+    }
 }
 
 
