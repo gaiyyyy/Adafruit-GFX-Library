@@ -79,6 +79,10 @@ public:
     void cp437(boolean x = true);
     void setFont(const GFXfont* f = NULL);
 
+  void drawTaiji(int16_t cx, int16_t cy, int16_t R, uint16_t color);
+
+
+
 #if ARDUINO >= 100
     virtual size_t write(uint8_t);
 #else
